@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private static final String MAIN_ACTIVITY_LOG = "MAIN_ACTIVITY_LOG";
 
     private static final int COMPANIES_FRAGMENT_INDEX = 0;
+    private static final int CAMERA_FRAGMENT_INDEX = 1;
+
     private static SensorManager sensorManager;
     private Sensor sensor;
 
@@ -182,6 +184,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 companies.get(i).setLatitude(newLatitude);
                 companies.get(i).setLongitude(newLongitude);
                 ((CompaniesFragment) fragmentList.get(COMPANIES_FRAGMENT_INDEX)).setCompanies(companies);
+                ((CameraFragment) fragmentList.get(CAMERA_FRAGMENT_INDEX)).setChangeCompanyCoordinate(companies.get((int)companyId));
                 break;
             }
         }

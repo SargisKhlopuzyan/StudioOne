@@ -39,11 +39,9 @@ public class CameraFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.e(CAMERA_FRAGMENT_LOG, "Camera onCreateView");
 
         rootView = inflater.inflate(R.layout.fragment_camera, container, false);
         cameraPreview = (SurfaceView) rootView.findViewById(R.id.cameraView);
-
         relativeLayout = (RelativeLayout)rootView.findViewById(R.id.relative_layout_camera_fragment);
 
         if (imageViewList != null) {
@@ -193,6 +191,13 @@ public class CameraFragment extends Fragment {
             imageView.setAdjustViewBounds(true);
             imageView.setVisibility(View.INVISIBLE);
             imageViewList.add(imageView);
+        }
+    }
+
+    public void setChangeCompanyCoordinate(Company company) {
+        if (companies != null) {
+            companies.get((int)company.getID()).setLatitude(company.getLatitude());
+            companies.get((int)company.getID()).setLongitude(company.getLongitude());
         }
     }
 
