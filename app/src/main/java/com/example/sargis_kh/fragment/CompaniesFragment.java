@@ -1,21 +1,21 @@
 package com.example.sargis_kh.fragment;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+        import android.os.Bundle;
+        import android.support.v4.app.Fragment;
+        import android.support.v4.app.FragmentManager;
+        import android.util.Log;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.AdapterView;
+        import android.widget.ArrayAdapter;
+        import android.widget.ListView;
 
-import com.example.sargis_kh.adapter.CompaniesListAdapter;
-import com.example.sargis_kh.model.Company;
-import com.example.sargis_kh.studioone.R;
+        import com.example.sargis_kh.adapter.CompaniesListAdapter;
+        import com.example.sargis_kh.model.Company;
+        import com.example.sargis_kh.studioone.R;
 
-import java.util.ArrayList;
+        import java.util.ArrayList;
 
 public class CompaniesFragment extends Fragment {
 

@@ -20,6 +20,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Display;
 import android.widget.Toast;
 
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
+                Log.e(MAIN_ACTIVITY_LOG, "currentLocation: " + location.getLongitude());
                 currentLocation = new Vector2(location.getLongitude(),location.getLatitude());
             }
 
@@ -137,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent event) {
         //if current location is not found, return
         if (currentLocation == null) {
+            Log.d(MAIN_ACTIVITY_LOG, "currentLocation == null");
             return;
         }
 
@@ -158,6 +161,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             ((CameraFragment)fragmentList.get(1)).hideAllLogos();
             return;
         } else {
+//            Log.d(MAIN_ACTIVITY_LOG, "lat: " + companies.get(0).getLatitude());
+
             for (int i = 0; i <companies.size(); i++) {
                 Vector2 logoPosition = CalculationHelper.getLogoPosition(screenSize, companies.get(i), currentLocation, azimuth);
                 if (logoPosition != null) {
@@ -176,11 +181,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     // Called when company position changed from Dialog Fragment
     @Override
-    public void CompanyPositionChanged(long companyId, double newLatitude, double newLognitude) {
+    public void CompanyPositionChanged(long companyId, double newLatitude, double newLongitude) {
         for (int i = 0; i < companies.size(); i++) {
             if (companies.get(i).getID() == companyId) {
                 companies.get(i).setLatitude(newLatitude);
-                companies.get(i).setLongitude(newLognitude);
+                companies.get(i).setLongitude(newLongitude);
                 ((CompaniesFragment) fragmentList.get(COMPANIES_FRAGMENT_INDEX)).setCompanies(companies);
                 break;
             }
@@ -190,8 +195,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     // Setup view pager
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new CompaniesFragment(), "Camera");
-        adapter.addFragment(new CameraFragment(), "Companies");
+        adapter.addFragment(new CompaniesFragment(), "Companies");
+        adapter.addFragment(new CameraFragment(), "Camera");
         viewPager.setAdapter(adapter);
     }
 

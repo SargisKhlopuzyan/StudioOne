@@ -79,10 +79,11 @@ public class CameraFragment extends Fragment {
         if (inPreview) {
             camera.stopPreview();
         }
-        camera.release();
+        if (camera != null) {
+            camera.release();
+        }
         camera = null;
         inPreview = false;
-
         super.onPause();
     }
 
