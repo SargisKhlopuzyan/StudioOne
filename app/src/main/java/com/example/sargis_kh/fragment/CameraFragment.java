@@ -28,7 +28,6 @@ public class CameraFragment extends Fragment {
     private ArrayList<Company> companies;
     private ArrayList<ImageView> imageViewList;
     private RelativeLayout relativeLayout;
-    private TextView textView;
 
     View rootView;
     SurfaceView cameraPreview = null;
@@ -55,8 +54,6 @@ public class CameraFragment extends Fragment {
             }
         }
 
-        textView = (TextView)rootView.findViewById(R.id.text_view_fragment_camera);
-
         cameraPreviewHolder = cameraPreview.getHolder();
         cameraPreviewHolder.addCallback(surfaceCallback);
         cameraPreviewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
@@ -67,7 +64,7 @@ public class CameraFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.e(CAMERA_FRAGMENT_LOG, "Camera onResume");
+//        Log.e(CAMERA_FRAGMENT_LOG, "Camera onResume");
         camera = getCamera("back");
         currentCamera = 1;
         startPreview();
@@ -75,15 +72,16 @@ public class CameraFragment extends Fragment {
 
     @Override
     public void onPause() {
-        Log.e(CAMERA_FRAGMENT_LOG, "Camera onPause");
-        if (inPreview) {
-            camera.stopPreview();
-        }
+//        Log.e(CAMERA_FRAGMENT_LOG, "Camera onPause");
         if (camera != null) {
+            if (inPreview) {
+                camera.stopPreview();
+            }
             camera.release();
+            camera = null;
         }
-        camera = null;
         inPreview = false;
+
         super.onPause();
     }
 
@@ -113,18 +111,18 @@ public class CameraFragment extends Fragment {
             try {
                 camera.setPreviewDisplay(cameraPreviewHolder);
             } catch (Throwable t) {
-                Log.e("PreviewDemo", "Exception in setPreviewDisplay()", t);
+                Log.e(CAMERA_FRAGMENT_LOG, "Exception in setPreviewDisplay()", t);
             }
 
             if (!cameraConfigured) {
                 Camera.Parameters parameters = camera.getParameters();
-                Log.v("CAMERA", parameters.toString());
+                Log.v(CAMERA_FRAGMENT_LOG, parameters.toString());
                 Camera.Size size = getBestPreviewSize(width, height,
                         parameters);
 
                 if (size != null) {
-                    Log.v("CameraPreviewHeight", ""+cameraPreview.getMeasuredHeight());
-                    Log.v("CameraRES", size.width + " " + size.height);
+                    Log.v(CAMERA_FRAGMENT_LOG, ""+cameraPreview.getMeasuredHeight());
+                    Log.v(CAMERA_FRAGMENT_LOG, size.width + " " + size.height);
                     parameters.setPreviewSize(size.width, size.height);
                     camera.setParameters(parameters);
                     cameraConfigured = true;
@@ -167,14 +165,14 @@ public class CameraFragment extends Fragment {
                 try {
                     cam = Camera.open(camIdx);
                 } catch (RuntimeException e) {
-                    Log.e("TEST", "Camera failed to open: " + e.getLocalizedMessage());
+                    Log.e(CAMERA_FRAGMENT_LOG, "Camera failed to open: " + e.getLocalizedMessage());
                 }
             }
             else if ((cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_BACK) && (getCamera == "back")) {
                 try {
                     cam = Camera.open(camIdx);
                 } catch (RuntimeException e) {
-                    Log.e("TEST", "Camera failed to open: " + e.getLocalizedMessage());
+                    Log.e(CAMERA_FRAGMENT_LOG, "Camera failed to open: " + e.getLocalizedMessage());
                 }
             }
         }

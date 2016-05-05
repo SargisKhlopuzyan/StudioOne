@@ -64,11 +64,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         screenSize = getScreenSize();
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 

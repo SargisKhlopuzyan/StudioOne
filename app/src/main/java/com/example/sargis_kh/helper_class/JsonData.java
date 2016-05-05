@@ -84,6 +84,27 @@ public class JsonData {
         } catch (JSONException e) {
         }
 
+        JSONObject object6 = new JSONObject();
+        try {
+            object6.put("id", 6);
+            object6.put("name", "Kanaker-Zeytun MC");
+            object6.put("lat", new Double(40.204457));
+            object6.put("lon", new Double(44.533086));
+            object6.put("logo", "logo");
+            jsonArray.put(object6);
+        } catch (JSONException e) {
+        }
+
+        JSONObject object7 = new JSONObject();
+        try {
+            object7.put("id", 7);
+            object7.put("name", "Kerama Marazzi");
+            object7.put("lat", new Double(40.201675));
+            object7.put("lon", new Double(44.532742));
+            object7.put("logo", "logo");
+            jsonArray.put(object7);
+        } catch (JSONException e) {
+        }
         return jsonArray;
     }
 
@@ -110,5 +131,4 @@ public class JsonData {
         }
         return companies;
     }
-
 }
